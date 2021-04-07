@@ -10,8 +10,8 @@ def currentWeather(location):
     country = "Australia"
     place = city + "," + country
     url = "https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=metric" % (place, apikey)
-    print(url)
     response = requests.get(url)
+    print(response.text)
     data = json.loads(response.text)
     returnedCountry = data['sys']['country']
     if returnedCountry != "AU":
@@ -19,6 +19,7 @@ def currentWeather(location):
         return message
     else:
         return data
-        
+
 load_dotenv(".env", verbose=True)
 apikey = os.getenv('APIKEY')
+currentWeather('Sydney')
