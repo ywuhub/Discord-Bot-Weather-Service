@@ -15,11 +15,16 @@ async def on_message(message):
         return
 
     msg = message.content
-
+    
     if message.content.startswith('$weather'):
         await get_current_weather(msg, message)
     elif message.content.startswith('$help'):
         await help_menu(message)
+
+@client.event
+async def on_ready():
+   channel = client.get_channel(828964390941753366)
+   await channel.send("The weather service bot is online. Please type $help for more a list of all the options.")
 
 # Load Environmental Variables
 load_dotenv(".env", verbose=True)
