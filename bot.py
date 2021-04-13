@@ -2,7 +2,7 @@
 import discord
 from dotenv import load_dotenv
 import os
-from process_commands import get_current_weather, help_menu
+from process_commands import get_current_weather, help_menu, get_forecast_weather
 
 # Initialise Client Connection to Discord
 client = discord.Client()
@@ -15,9 +15,11 @@ async def on_message(message):
         return
 
     msg = message.content
-    
+
     if message.content.startswith('$weather'):
         await get_current_weather(msg, message)
+    elif message.content.startswith('$forecast'):
+        await get_forecast_weather(msg,message)
     elif message.content.startswith('$help'):
         await help_menu(message)
 
