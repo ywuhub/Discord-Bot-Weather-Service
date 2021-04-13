@@ -6,6 +6,23 @@ import requests
 
 # Methods to fetch from Weather API
 
+# Turns weather into emoji on discord
+def emojify(weather):
+    if weather == "Clouds":
+        return ":cloud:"
+    elif weather == "Clear":
+        return ":sunny:"
+    elif weather == "Rain":
+        return ":cloud_rain:"
+    elif weather == "Snow":
+        return ":cloud_snow:"
+    elif weather == "Thunderstorm":
+        return ":thunder_cloud_rain:"
+    elif weather == "Tornado":
+        return ":cloud_tornado:"
+    elif weather == "Fog":
+        return ":fog:"
+
 # Get Longitute and Latitute for the city to get daily forecast from API
 def getLatandLong(location):
     country = "Australia"
@@ -36,7 +53,11 @@ def currentWeather(location):
         message = location + " in Australia does not exist"
         return message
     else:
-        return data
+        String = "Todays Weather Conditions are"
+        temp = " Min " + str(data['main']['temp_min']) + "C Max " + str(data['main']['temp_max']) + "C "
+        weather = emojify(data['weather'][0]['main'])
+        String = String + temp + weather
+        return String
 
 # Get the 5 day forecast (3 hour intervals) for an Australia city
 # def fiveDayWeather(location):
@@ -68,8 +89,8 @@ def forecastWeather(location):
         String = "Weekly forecast for " + location + "\n"
         #array.append("Weekly forecast for " + city)
         for i in data['daily']:
-            temp = "Min " + str(i['temp']['min']) + " Max " + str(i['temp']['max'])
-            weather = i['weather'][0]['main']
+            temp = "Min " + str(i['temp']['min']) + "C Max " + str(i['temp']['max']) + "C"
+            weather = emojify(i['weather'][0]['main'])
             String = String + temp + " Weather Condition is " + weather + "\n"
         return String
 
