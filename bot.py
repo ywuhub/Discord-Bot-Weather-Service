@@ -25,8 +25,9 @@ async def on_message(message):
 
 @client.event
 async def on_ready():
-   channel = client.get_channel(828964390941753366)
-   await channel.send("The weather service bot is online. Please type $help for more a list of all the options.")
+    channel_id = os.getenv('CHANNEL')
+    channel = client.get_channel(channel_id)
+    await channel.send("The weather service bot is online. Please type $help to get all the available commands.")
 
 # Load Environmental Variables
 load_dotenv(".env", verbose=True)

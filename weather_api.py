@@ -32,7 +32,7 @@ def getLatandLong(location):
     data = json.loads(response.text)
     returnedCountry = data['sys']['country']
     if returnedCountry != "AU":
-        message = location + " in Australia does not exist"
+        message = "The city " + location + " does not exist in Australia."
         return message
     else:
         co = []
