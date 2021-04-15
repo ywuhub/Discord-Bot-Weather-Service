@@ -25,7 +25,7 @@ def emojify(weather):
         return ":cloud_tornado:"
     elif weather == "Fog":
         return ":fog:"
-    else
+    else:
         weathers == ":" + weather + ":"
         return weathers
 
@@ -33,10 +33,13 @@ def emojify(weather):
 def getLatandLong(location):
     country = "Australia"
     place = location + "," + country
-    url = "https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=metric" % (place, apikey)
-    response = requests.get(url)
-    data = json.loads(response.text)
-    returnedCountry = data['sys']['country']
+    try:
+        url = "https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=metric" % (place, apikey)
+        response = requests.get(url)
+        data = json.loads(response.text)
+        returnedCountry = data['sys']['country']
+    except:
+        return "Please enter a valid city in Australia"
     if returnedCountry != "AU":
         message = location + " in Australia does not exist"
         return message
