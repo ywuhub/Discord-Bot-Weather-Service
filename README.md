@@ -1,3 +1,3 @@
 # Discord Bot Weather Service
  
-Discord Bot to provide weather for a city
+Discord Bot to provide you the current weather for a city in Australia

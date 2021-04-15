@@ -41,7 +41,7 @@ def getLatandLong(location):
     except:
         return "Please enter a valid city in Australia"
     if returnedCountry != "AU":
-        message = location + " in Australia does not exist"
+        message = "The city " + location + " does not exist in Australia."
         return message
     else:
         co = []
