@@ -3,10 +3,14 @@ from dotenv import load_dotenv
 import json
 import os
 import requests
-
+import datetime
 #TODO see if ([a-zA-Z\s])+ regex is neccessary
 
 # Methods to fetch from Weather API
+
+# Adds suffix to date
+def ending(day):
+    return 'th' if 11<=day<=13 else {1:'st',2:'nd',3:'rd'}.get(day%10, 'th')
 
 # Turns weather into emoji on discord
 # TODO Mist,Smoke,Haze,Dust,Sand,Ash,Squall
@@ -66,10 +70,12 @@ def currentWeather(location):
         message = location + " in Australia does not exist"
         return message
     else:
-        String = "Todays Weather Conditions are"
+        date = datetime.datetime.now()
+        suffix = ending(int(date.strftime("%d")))
+        String = date.strftime("%A") + " the " + date.strftime("%d") + suffix + " Weather Conditions are "
         temp = " Min " + str(data['main']['temp_min']) + "C Max " + str(data['main']['temp_max']) + "C "
         weather = emojify(data['weather'][0]['main'])
-        String = String + temp + weather + " " + data['weather'][0]['main']
+        String = String + temp + "with the skies being " + weather + " " + data['weather'][0]['main']
         return String
 
 # Get the 5 day forecast (3 hour intervals) for an Australia city
@@ -104,11 +110,17 @@ def forecastWeather(location):
             return "Please enter a valid city in Australia"
 
         String = "Weekly forecast for " + location + "\n"
+        date = datetime.datetime.now()
+        suffix = ending(int(date.strftime("%d")))
+        delta = datetime.timedelta(days=1)
         #array.append("Weekly forecast for " + city)
         for i in data['daily']:
+            String = String + date.strftime("%A") + " the " + date.strftime("%d") + suffix + " Weather Conditions are "
             temp = "Min " + str(i['temp']['min']) + "C Max " + str(i['temp']['max']) + "C"
             weather = emojify(i['weather'][0]['main'])
-            String = String + temp + " Weather Condition is " + weather + " " + i['weather'][0]['main'] + "\n"
+            String = String + temp + " with the skies being " + weather + " " + i['weather'][0]['main'] + "\n"
+            date += delta
+            suffix = ending(int(date.strftime("%d")))
         return String
 
 load_dotenv(".env", verbose=True)
