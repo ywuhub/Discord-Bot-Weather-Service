@@ -14,13 +14,13 @@ bot.remove_command('help')
 # Listen for Discord Events
 # TODO catch when no arguments were given
 @bot.command(name='weather', help='Type !weather {city} to get the current weather for the city.')
-async def current_Weather(ctx,city):
-    todaysWeather = currentWeather(city)
+async def current_Weather(ctx,*args):
+    todaysWeather = currentWeather(args)
     await ctx.send(todaysWeather)
 
 @bot.command(name='forecast', help='Type !forecast {city} to get the 7 day forecast for the city.')
-async def forecast_Weather(ctx,city):
-    forecastedWeather = forecastWeather(city)
+async def forecast_Weather(ctx,*args):
+    forecastedWeather = forecastWeather(args)
     await ctx.send(forecastedWeather)
 
 @bot.command(name='help')
@@ -43,6 +43,6 @@ Weather Service Discord Bot - Help Menu
 async def on_ready():
     print('Ready!')
     channel = bot.get_channel(828964390941753366)
-    await channel.send('The weather service bot is online. Please type $help for more a list of all the options.')
+    await channel.send('The weather service bot is online. Please type !help for more a list of all the options.')
 
 bot.run(TOKEN)

@@ -55,7 +55,7 @@ def getLatandLong(location):
 
 # Get the current weather for an Australia city
 def currentWeather(location):
-    city = location
+    city = ' '.join(location)
     country = "Australia"
     place = city + "," + country
     try:
@@ -73,29 +73,15 @@ def currentWeather(location):
         date = datetime.datetime.now()
         suffix = ending(int(date.strftime("%d")))
         String = date.strftime("%A") + " the " + date.strftime("%d") + suffix + " Weather Conditions are "
-        temp = " Min " + str(data['main']['temp_min']) + "C Max " + str(data['main']['temp_max']) + "C "
+        temp = " Min " + str(data['main']['temp_min']) + "°C Max " + str(data['main']['temp_max']) + "°C "
         weather = emojify(data['weather'][0]['main'])
         String = String + temp + "with the skies being " + weather + " " + data['weather'][0]['main']
         return String
 
-# Get the 5 day forecast (3 hour intervals) for an Australia city
-# def fiveDayWeather(location):
-#     city = location
-#     country = "Australia"
-#     place = city + "," + country
-#     url = "https://api.openweathermap.org/data/2.5/forecast?q=%s&appid=%s&units=metric" % (place, apikey)
-#     response = requests.get(url)
-#     data = json.loads(response.text)
-#     returnedCountry = data['sys']['country']
-#     if returnedCountry != "AU":
-#         message = location + " in Australia does not exist"
-#         return message
-#     else:
-#         return data
-
 # Get the 7 day forecast for an Australia city (TODO: Min info, Standard, Max info)
 def forecastWeather(location):
     # find lat and long through current weather
+    location = ' '.join(location)
     co = getLatandLong(location)
     if type(co) is str:
         return co
@@ -116,7 +102,7 @@ def forecastWeather(location):
         #array.append("Weekly forecast for " + city)
         for i in data['daily']:
             String = String + date.strftime("%A") + " the " + date.strftime("%d") + suffix + " Weather Conditions are "
-            temp = "Min " + str(i['temp']['min']) + "C Max " + str(i['temp']['max']) + "C"
+            temp = "Min " + str(i['temp']['min']) + "°C Max " + str(i['temp']['max']) + "°C"
             weather = emojify(i['weather'][0]['main'])
             String = String + temp + " with the skies being " + weather + " " + i['weather'][0]['main'] + "\n"
             date += delta
