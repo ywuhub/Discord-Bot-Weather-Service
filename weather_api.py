@@ -4,16 +4,12 @@ import json
 import os
 import requests
 import datetime
-#TODO see if ([a-zA-Z\s])+ regex is neccessary
-
-# Methods to fetch from Weather API
 
 # Adds suffix to date
 def ending(day):
     return 'th' if 11<=day<=13 else {1:'st',2:'nd',3:'rd'}.get(day%10, 'th')
 
 # Turns weather into emoji on discord
-# TODO Mist,Smoke,Haze,Dust,Sand,Ash,Squall
 def emojify(weather):
     if weather == "Clouds":
         return ":cloud:"
@@ -78,7 +74,7 @@ def currentWeather(location):
         String = String + temp + "with the skies being " + weather + " " + data['weather'][0]['main']
         return String
 
-# Get the 7 day forecast for an Australia city (TODO: Min info, Standard, Max info)
+# Get the 7 day forecast for an Australia city
 def forecastWeather(location):
     # find lat and long through current weather
     location = ' '.join(location)
