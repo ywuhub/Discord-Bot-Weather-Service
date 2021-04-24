@@ -14,8 +14,11 @@ Bot's Discord Channel: https://discord.gg/6Br88QCMTA
 ![Bot's Help Menu](https://i.ibb.co/b72M8Dg/Capture.png)
 
 * Get the Current Weather for an Australian city (Write !weather {city_name}) - <br>
-![Bot's Help Menu](https://i.ibb.co/180nSpj/Capture.png)
+![Bot's Current Weather Feature](https://i.ibb.co/VTV8jNz/Capture.png)
 
-* Get the 7 day Weather Forecast for an Australian city (Write !weather {city_name}) - <br>
-![Bot's Help Menu](https://i.ibb.co/qWVqQH7/Capture.png)
+* Get the 7 day Weather Forecast for an Australian city (Write !forecast {city_name}) - <br>
+![Bot's Forecast Weather Feature](https://i.ibb.co/qWVqQH7/Capture.png)
+
+* Error Handling (Invalid City) - <br>
+![Bot's Error Handling](https://i.ibb.co/Jj4TDT3/Capture.png)
 
