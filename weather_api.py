@@ -1,9 +1,11 @@
 # Import Statements
-from dotenv import load_dotenv
-import json
-import os
-import requests
 import datetime
+import json
+import requests
+import os
+
+# Load Environmental Variables
+apikey = os.environ['APIKEY']
 
 # Adds suffix to date
 def ending(day):
@@ -11,6 +13,7 @@ def ending(day):
 
 # Turns weather into emoji on discord
 def emojify(weather):
+    weathers = ""
     if weather == "Clouds":
         return ":cloud:"
     elif weather == "Clear":
@@ -60,7 +63,7 @@ def currentWeather(location):
         data = json.loads(response.text)
         returnedCountry = data['sys']['country']
     except:
-        return "Please enter a valid city in Australia"
+        return "Error (Invalid City): Please enter a valid city in Australia"
 
     if returnedCountry != "AU":
         message = location + " in Australia does not exist"
@@ -68,8 +71,8 @@ def currentWeather(location):
     else:
         date = datetime.datetime.now()
         suffix = ending(int(date.strftime("%d")))
-        String = date.strftime("%A") + " the " + date.strftime("%d") + suffix + " Weather Conditions are "
-        temp = " Min " + str(data['main']['temp_min']) + "°C Max " + str(data['main']['temp_max']) + "°C "
+        String = date.strftime("%A") + " the " + date.strftime("%d") + suffix + " | Weather Conditions are "
+        temp = " Min " + str(data['main']['temp_min']) + "°C & Max " + str(data['main']['temp_max']) + "°C "
         weather = emojify(data['weather'][0]['main'])
         String = String + temp + "with the skies being " + weather + " " + data['weather'][0]['main']
         return String
@@ -89,21 +92,20 @@ def forecastWeather(location):
             response = requests.get(url)
             data = json.loads(response.text)
         except:
-            return "Please enter a valid city in Australia"
-
+            return "Error (Invalid City): Please enter a valid city in Australia"
+        
         String = "Weekly forecast for " + location + "\n"
         date = datetime.datetime.now()
         suffix = ending(int(date.strftime("%d")))
         delta = datetime.timedelta(days=1)
-        #array.append("Weekly forecast for " + city)
+
         for i in data['daily']:
-            String = String + date.strftime("%A") + " the " + date.strftime("%d") + suffix + " Weather Conditions are "
-            temp = "Min " + str(i['temp']['min']) + "°C Max " + str(i['temp']['max']) + "°C"
+            String = String + date.strftime("%A") + " the " + date.strftime("%d") + suffix + " | Weather Conditions are "
+            temp = "Min " + str(i['temp']['min']) + "°C & Max " + str(i['temp']['max']) + "°C"
             weather = emojify(i['weather'][0]['main'])
             String = String + temp + " with the skies being " + weather + " " + i['weather'][0]['main'] + "\n"
             date += delta
-            suffix = ending(int(date.strftime("%d")))
-        return String
 
-load_dotenv(".env", verbose=True)
-apikey = os.getenv('APIKEY')
+    return String
+
+

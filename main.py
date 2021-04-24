@@ -1,12 +1,10 @@
 # Import Statements
-from dotenv import load_dotenv
 from discord.ext import commands
 import os
 from weather_api import currentWeather,forecastWeather
 
 # Load Environmental Variables
-load_dotenv(".env", verbose=True)
-TOKEN = os.getenv('TOKEN')
+TOKEN = os.environ['TOKEN']
 
 # Initialise Client Connection to Discord
 bot = commands.Bot(command_prefix='!')
@@ -37,7 +35,7 @@ Weather Service Discord Bot - Help Menu
 
 @bot.event
 async def on_ready():
-    print('Ready!')
+    print('The Weather Service Bot is ready!')
     channel = bot.get_channel(834401398015787012)
     await channel.send('The weather service bot is online. Please type !help for more a list of all the options.')
 
