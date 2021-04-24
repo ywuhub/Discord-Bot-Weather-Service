@@ -2,10 +2,10 @@
 from discord.ext import commands
 import os
 from weather_api import currentWeather,forecastWeather
+from keep_alive import keep_alive
 
 # Load Environmental Variables
 TOKEN = os.environ['TOKEN']
-CHANNEL = os.environ['CHANNEL']
 
 # Initialise Client Connection to Discord
 bot = commands.Bot(command_prefix='!')
@@ -37,7 +37,8 @@ Weather Service Discord Bot - Help Menu
 @bot.event
 async def on_ready():
     print('The Weather Service Bot is running!')
-    channel = bot.get_channel(CHANNEL)
+    channel = bot.get_channel(834401398015787012)
     await channel.send('The weather service bot is online. Please type !help for more a list of all the options.')
 
+keep_alive()
 bot.run(TOKEN)
