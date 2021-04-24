@@ -66,12 +66,12 @@ def currentWeather(location):
         return "Error (Invalid City): Please enter a valid city in Australia"
 
     if returnedCountry != "AU":
-        message = location + " in Australia does not exist"
+        message = ' '.join(location) + " in Australia does not exist"
         return message
     else:
         date = datetime.datetime.now()
         suffix = ending(int(date.strftime("%d")))
-        String = date.strftime("%A") + " the " + date.strftime("%d") + suffix + " | Weather Conditions are "
+        String =' Current weather for ' + city + ' | ' + date.strftime("%A") + " the " + date.strftime("%d") + suffix + " | Weather Conditions are "
         temp = " Min " + str(data['main']['temp_min']) + "°C & Max " + str(data['main']['temp_max']) + "°C "
         weather = emojify(data['weather'][0]['main'])
         String = String + temp + "with the skies being " + weather + " " + data['weather'][0]['main']
@@ -107,5 +107,3 @@ def forecastWeather(location):
             date += delta
 
     return String
-
-
