@@ -42,7 +42,7 @@ def getLatandLong(location):
         data = json.loads(response.text)
         returnedCountry = data['sys']['country']
     except:
-        return "Please enter a valid city in Australia"
+        return "Error (Invalid City): Please enter a valid city in Australia"
     if returnedCountry != "AU":
         message = "The city " + location + " does not exist in Australia."
         return message
