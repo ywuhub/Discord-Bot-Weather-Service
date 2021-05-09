@@ -1,7 +1,7 @@
 # Weather Service Discord Bot
 
 ## Description
-Discord Bot that will provide you the current weather for a city in Australia
+This is a Discord Bot that will provide you the current weather for a city in Australia as well as a 7-day forecast for a city in Australia. It comes with a help menu which explains how to use the commands and what parameters can be entered.
 
 ## Deployment Link
 Bot's Discord Channel: https://discord.gg/6Br88QCMTA
